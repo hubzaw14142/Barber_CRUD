@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5d7b69cf8dda49a3a020a253540a144a" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="barbershopModel.grafik" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="barbershopModel.klienci" Width="1.5" PointX="9.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="barbershopModel.pracownicy" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="barbershopModel.rezerwacje" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="barbershopModel.uslugi" Width="1.5" PointX="3.375" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="barbershopModel.FK__grafik__id_praco__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="barbershopModel.FK__rezerwacj__id_kl__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="barbershopModel.FK__rezerwacj__id_pr__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="barbershopModel.FK__rezerwacj__id_us__693CA210" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

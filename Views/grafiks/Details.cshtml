@@ -1,0 +1,50 @@
+﻿@model newbarbershop.grafik
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>grafik</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.od_godziny)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.od_godziny)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.do_godziny)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.do_godziny)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pracownicy.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pracownicy.imie)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_zmiany }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

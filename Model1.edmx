@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="barbershopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="grafik">
+          <Key>
+            <PropertyRef Name="id_zmiany" />
+          </Key>
+          <Property Name="id_zmiany" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pracownika" Type="int" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+          <Property Name="od_godziny" Type="time" Precision="0" Nullable="false" />
+          <Property Name="do_godziny" Type="time" Precision="0" />
+        </EntityType>
+        <EntityType Name="klienci">
+          <Key>
+            <PropertyRef Name="id_klienta" />
+          </Key>
+          <Property Name="id_klienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="nazwisko" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="adres" Type="nchar" MaxLength="25" />
+          <Property Name="telefon" Type="nchar" MaxLength="9" />
+          <Property Name="email" Type="nchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="pracownicy">
+          <Key>
+            <PropertyRef Name="id_pracownika" />
+          </Key>
+          <Property Name="id_pracownika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="nazwisko" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="adres" Type="nchar" MaxLength="25" />
+          <Property Name="telefon" Type="nchar" MaxLength="9" />
+          <Property Name="email" Type="nchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="rezerwacje">
+          <Key>
+            <PropertyRef Name="id_rezerwacji" />
+          </Key>
+          <Property Name="id_rezerwacji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klienta" Type="int" Nullable="false" />
+          <Property Name="id_pracownika" Type="int" />
+          <Property Name="id_uslugi" Type="int" />
+          <Property Name="data" Type="date" Nullable="false" />
+          <Property Name="godzina" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uslugi">
+          <Key>
+            <PropertyRef Name="id_uslugi" />
+          </Key>
+          <Property Name="id_uslugi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="cena" Type="int" />
+          <Property Name="czas_wykonania(w minutach)" Type="int" />
+        </EntityType>
+        <Association Name="FK__grafik__id_praco__6FE99F9F">
+          <End Role="pracownicy" Type="Self.pracownicy" Multiplicity="1" />
+          <End Role="grafik" Type="Self.grafik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pracownicy">
+              <PropertyRef Name="id_pracownika" />
+            </Principal>
+            <Dependent Role="grafik">
+              <PropertyRef Name="id_pracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rezerwacj__id_kl__6754599E">
+          <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klienci">
+              <PropertyRef Name="id_klienta" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rezerwacj__id_pr__68487DD7">
+          <End Role="pracownicy" Type="Self.pracownicy" Multiplicity="0..1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pracownicy">
+              <PropertyRef Name="id_pracownika" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_pracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rezerwacj__id_us__693CA210">
+          <End Role="uslugi" Type="Self.uslugi" Multiplicity="0..1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uslugi">
+              <PropertyRef Name="id_uslugi" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_uslugi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="barbershopModelStoreContainer">
+          <EntitySet Name="grafik" EntityType="Self.grafik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klienci" EntityType="Self.klienci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pracownicy" EntityType="Self.pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uslugi" EntityType="Self.uslugi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__grafik__id_praco__6FE99F9F" Association="Self.FK__grafik__id_praco__6FE99F9F">
+            <End Role="pracownicy" EntitySet="pracownicy" />
+            <End Role="grafik" EntitySet="grafik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rezerwacj__id_kl__6754599E" Association="Self.FK__rezerwacj__id_kl__6754599E">
+            <End Role="klienci" EntitySet="klienci" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rezerwacj__id_pr__68487DD7" Association="Self.FK__rezerwacj__id_pr__68487DD7">
+            <End Role="pracownicy" EntitySet="pracownicy" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rezerwacj__id_us__693CA210" Association="Self.FK__rezerwacj__id_us__693CA210">
+            <End Role="uslugi" EntitySet="uslugi" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="barbershopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="grafik">
+          <Key>
+            <PropertyRef Name="id_zmiany" />
+          </Key>
+          <Property Name="id_zmiany" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pracownika" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="od_godziny" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="do_godziny" Type="Time" Precision="0" />
+          <NavigationProperty Name="pracownicy" Relationship="Self.FK__grafik__id_praco__6FE99F9F" FromRole="grafik" ToRole="pracownicy" />
+        </EntityType>
+        <EntityType Name="klienci">
+          <Key>
+            <PropertyRef Name="id_klienta" />
+          </Key>
+          <Property Name="id_klienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="adres" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="telefon" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="rezerwacje" Relationship="Self.FK__rezerwacj__id_kl__6754599E" FromRole="klienci" ToRole="rezerwacje" />
+        </EntityType>
+        <EntityType Name="pracownicy">
+          <Key>
+            <PropertyRef Name="id_pracownika" />
+          </Key>
+          <Property Name="id_pracownika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="adres" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="telefon" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="grafik" Relationship="Self.FK__grafik__id_praco__6FE99F9F" FromRole="pracownicy" ToRole="grafik" />
+          <NavigationProperty Name="rezerwacje" Relationship="Self.FK__rezerwacj__id_pr__68487DD7" FromRole="pracownicy" ToRole="rezerwacje" />
+        </EntityType>
+        <EntityType Name="rezerwacje">
+          <Key>
+            <PropertyRef Name="id_rezerwacji" />
+          </Key>
+          <Property Name="id_rezerwacji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klienta" Type="Int32" Nullable="false" />
+          <Property Name="id_pracownika" Type="Int32" />
+          <Property Name="id_uslugi" Type="Int32" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="godzina" Type="Time" Nullable="false" Precision="0" />
+          <NavigationProperty Name="klienci" Relationship="Self.FK__rezerwacj__id_kl__6754599E" FromRole="rezerwacje" ToRole="klienci" />
+          <NavigationProperty Name="pracownicy" Relationship="Self.FK__rezerwacj__id_pr__68487DD7" FromRole="rezerwacje" ToRole="pracownicy" />
+          <NavigationProperty Name="uslugi" Relationship="Self.FK__rezerwacj__id_us__693CA210" FromRole="rezerwacje" ToRole="uslugi" />
+        </EntityType>
+        <EntityType Name="uslugi">
+          <Key>
+            <PropertyRef Name="id_uslugi" />
+          </Key>
+          <Property Name="id_uslugi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cena" Type="Int32" />
+          <Property Name="czas_wykonania_w_minutach_" Type="Int32" />
+          <NavigationProperty Name="rezerwacje" Relationship="Self.FK__rezerwacj__id_us__693CA210" FromRole="uslugi" ToRole="rezerwacje" />
+        </EntityType>
+        <Association Name="FK__grafik__id_praco__6FE99F9F">
+          <End Role="pracownicy" Type="Self.pracownicy" Multiplicity="1" />
+          <End Role="grafik" Type="Self.grafik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pracownicy">
+              <PropertyRef Name="id_pracownika" />
+            </Principal>
+            <Dependent Role="grafik">
+              <PropertyRef Name="id_pracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rezerwacj__id_kl__6754599E">
+          <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klienci">
+              <PropertyRef Name="id_klienta" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rezerwacj__id_pr__68487DD7">
+          <End Role="pracownicy" Type="Self.pracownicy" Multiplicity="0..1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pracownicy">
+              <PropertyRef Name="id_pracownika" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_pracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rezerwacj__id_us__693CA210">
+          <End Role="uslugi" Type="Self.uslugi" Multiplicity="0..1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uslugi">
+              <PropertyRef Name="id_uslugi" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_uslugi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="barbershopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="grafik" EntityType="Self.grafik" />
+          <EntitySet Name="klienci" EntityType="Self.klienci" />
+          <EntitySet Name="pracownicy" EntityType="Self.pracownicy" />
+          <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" />
+          <EntitySet Name="uslugi" EntityType="Self.uslugi" />
+          <AssociationSet Name="FK__grafik__id_praco__6FE99F9F" Association="Self.FK__grafik__id_praco__6FE99F9F">
+            <End Role="pracownicy" EntitySet="pracownicy" />
+            <End Role="grafik" EntitySet="grafik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rezerwacj__id_kl__6754599E" Association="Self.FK__rezerwacj__id_kl__6754599E">
+            <End Role="klienci" EntitySet="klienci" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rezerwacj__id_pr__68487DD7" Association="Self.FK__rezerwacj__id_pr__68487DD7">
+            <End Role="pracownicy" EntitySet="pracownicy" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rezerwacj__id_us__693CA210" Association="Self.FK__rezerwacj__id_us__693CA210">
+            <End Role="uslugi" EntitySet="uslugi" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="barbershopModelStoreContainer" CdmEntityContainer="barbershopEntities">
+          <EntitySetMapping Name="grafik">
+            <EntityTypeMapping TypeName="barbershopModel.grafik">
+              <MappingFragment StoreEntitySet="grafik">
+                <ScalarProperty Name="id_zmiany" ColumnName="id_zmiany" />
+                <ScalarProperty Name="id_pracownika" ColumnName="id_pracownika" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="od_godziny" ColumnName="od_godziny" />
+                <ScalarProperty Name="do_godziny" ColumnName="do_godziny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klienci">
+            <EntityTypeMapping TypeName="barbershopModel.klienci">
+              <MappingFragment StoreEntitySet="klienci">
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pracownicy">
+            <EntityTypeMapping TypeName="barbershopModel.pracownicy">
+              <MappingFragment StoreEntitySet="pracownicy">
+                <ScalarProperty Name="id_pracownika" ColumnName="id_pracownika" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rezerwacje">
+            <EntityTypeMapping TypeName="barbershopModel.rezerwacje">
+              <MappingFragment StoreEntitySet="rezerwacje">
+                <ScalarProperty Name="id_rezerwacji" ColumnName="id_rezerwacji" />
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="id_pracownika" ColumnName="id_pracownika" />
+                <ScalarProperty Name="id_uslugi" ColumnName="id_uslugi" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="godzina" ColumnName="godzina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uslugi">
+            <EntityTypeMapping TypeName="barbershopModel.uslugi">
+              <MappingFragment StoreEntitySet="uslugi">
+                <ScalarProperty Name="id_uslugi" ColumnName="id_uslugi" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="czas_wykonania_w_minutach_" ColumnName="czas_wykonania(w minutach)" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

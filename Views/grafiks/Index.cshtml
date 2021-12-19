@@ -1,0 +1,51 @@
+﻿@model IEnumerable<newbarbershop.grafik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.od_godziny)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.do_godziny)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pracownicy.imie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.od_godziny)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.do_godziny)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pracownicy.imie)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_zmiany }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_zmiany }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_zmiany })
+        </td>
+    </tr>
+}
+
+</table>

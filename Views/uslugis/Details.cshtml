@@ -1,0 +1,42 @@
+﻿@model newbarbershop.uslugi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>uslugi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.czas_wykonania_w_minutach_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.czas_wykonania_w_minutach_)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_uslugi }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

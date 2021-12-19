@@ -1,0 +1,58 @@
+﻿@model newbarbershop.rezerwacje
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>rezerwacje</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.godzina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.godzina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.klienci.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.klienci.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pracownicy.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pracownicy.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uslugi.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uslugi.nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_rezerwacji }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

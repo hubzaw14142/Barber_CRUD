@@ -1,0 +1,57 @@
+﻿@model IEnumerable<newbarbershop.rezerwacje>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.godzina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.klienci.imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pracownicy.imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uslugi.nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.godzina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.klienci.imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pracownicy.imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uslugi.nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_rezerwacji }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_rezerwacji }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_rezerwacji })
+        </td>
+    </tr>
+}
+
+</table>
